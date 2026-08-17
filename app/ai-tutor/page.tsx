@@ -1,0 +1,1 @@
+export default function AiTutorPage(){return <main className="shell"><section className="auth-page"><div className="eyebrow">AI TUTOR</div><h1>تحدث بالعربية دون خوف.</h1><p>سنضيف السيناريوهات والمحادثة النصية والتقرير الذكي في المرحلة التالية.</p><a className="button" href="/dashboard">العودة إلى اللوحة</a></section></main>}

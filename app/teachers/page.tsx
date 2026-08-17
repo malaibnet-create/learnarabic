@@ -1,0 +1,1 @@
+export default function TeachersPage(){return <main className="shell"><section className="auth-page"><div className="eyebrow">مدرسون حقيقيون</div><h1>احجز حصتك القادمة.</h1><p>سنضيف ملفات المدرسين والساعات المتاحة والحجز في المرحلة التالية.</p><a className="button" href="/dashboard">العودة إلى اللوحة</a></section></main>}

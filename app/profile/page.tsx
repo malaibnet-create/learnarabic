@@ -1,0 +1,21 @@
+'use client';
+
+import { FormEvent, useEffect, useState } from 'react';
+import { useRouter } from 'next/navigation';
+import { createClient } from '../../lib/supabase/client';
+
+type Profile = { full_name: string | null; age: number | null; started_learning: string | null; learning_goal: string | null; interests: string[] | null; arabic_track: string | null };
+
+export default function ProfilePage() {
+  const router = useRouter();
+  const [email, setEmail] = useState('');
+  const [profile, setProfile] = useState<Profile>({ full_name: '', age: null, started_learning: '', learning_goal: '', interests: [], arabic_track: 'الفصحى' });
+  const [password, setPassword] = useState(''); const [message, setMessage] = useState(''); const [error, setError] = useState(''); const [loading, setLoading] = useState(true);
+
+  useEffect(() => { (async () => { const client = createClient(); const { data: { user } } = await client.auth.getUser(); if (!user) return router.replace('/login'); setEmail(user.email ?? ''); const { data } = await client.from('profiles').select('full_name,age,started_learning,learning_goal,interests,arabic_track').eq('id', user.id).maybeSingle(); if (data) setProfile(current => ({ ...current, ...data })); else setProfile(current => ({ ...current, full_name: user.user_metadata?.full_name ?? '' })); setLoading(false); })(); }, [router]);
+
+  async function save(event: FormEvent<HTMLFormElement>) { event.preventDefault(); setMessage(''); setError(''); const supabase = createClient(); const { data: { user } } = await supabase.auth.getUser(); if (!user) return; const { error: profileError } = await supabase.from('profiles').upsert({ id: user.id, full_name: profile.full_name, age: profile.age, started_learning: profile.started_learning, learning_goal: profile.learning_goal, interests: profile.interests ?? [], arabic_track: profile.arabic_track }); if (profileError) return setError('تعذر حفظ بياناتك. شغّل Migration الخاصة بالملف الشخصي في Supabase.'); await supabase.auth.updateUser({ data: { full_name: profile.full_name } }); if (password) { if (password.length < 6) return setError('كلمة المرور يجب أن تحتوي على 6 أحرف على الأقل.'); const { error: passwordError } = await supabase.auth.updateUser({ password }); if (passwordError) return setError('تعذر تغيير كلمة المرور.'); setPassword(''); } setMessage('تم حفظ بيانات الحساب.'); }
+
+  if (loading) return <main className="shell"><section className="auth-page"><p>جارٍ تحميل الحساب...</p></section></main>;
+  return <main className="shell"><header className="topbar"><a className="brand" href="/dashboard"><span className="brand-mark">ع</span><span>Dar<span>Lugha</span></span></a><a className="link" href="/dashboard">العودة إلى اللوحة</a></header><section className="profile-page"><div className="eyebrow">حسابي</div><h1>ملف الطالب وإعداداته</h1><p className="muted-text">حدّث معلوماتك لتخصيص تجربة التعلم.</p><div className="profile-summary"><strong>{profile.full_name || 'طالب DarLugha'}</strong><span>{email}</span></div><form onSubmit={save} className="profile-form"><label>الاسم الكامل<input value={profile.full_name ?? ''} onChange={event => setProfile({ ...profile, full_name: event.target.value })} required /></label><label>البريد الإلكتروني<input value={email} readOnly /></label><label>العمر<input type="number" min={8} max={100} value={profile.age ?? ''} onChange={event => setProfile({ ...profile, age: event.target.value ? Number(event.target.value) : null })} /></label><label>نوع العربية<select value={profile.arabic_track ?? 'الفصحى'} onChange={event => setProfile({ ...profile, arabic_track: event.target.value })}><option>الفصحى</option><option>الدارجة</option><option>كلاهما</option></select></label><label>الهدف من التعلم<input value={profile.learning_goal ?? ''} onChange={event => setProfile({ ...profile, learning_goal: event.target.value })} /></label><label>كلمة مرور جديدة<input type="password" minLength={6} placeholder="اتركها فارغة إذا لم ترد تغييرها" value={password} onChange={event => setPassword(event.target.value)} /></label><button className="button">حفظ التغييرات</button>{message && <p className="success-text" role="status">{message}</p>}{error && <p role="alert">{error}</p>}</form></section></main>;
+}

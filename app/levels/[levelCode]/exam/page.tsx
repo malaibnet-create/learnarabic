@@ -1,0 +1,1 @@
+export default function LevelExamPage(){return <main className="shell"><section className="auth-page"><div className="eyebrow">الامتحان العام</div><h1>امتحان المستوى</h1><p>تم فتح الامتحان. سنضيف الأسئلة وحساب النجاح في الخطوة التالية.</p><a className="button" href="/dashboard">العودة إلى اللوحة</a></section></main>}

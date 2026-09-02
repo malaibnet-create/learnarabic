@@ -1,0 +1,285 @@
+.reading-prediction-image,
+.conversation-cover {
+  display: block;
+  width: 100%;
+  max-width: 100%;
+  height: auto;
+  object-fit: cover;
+  border-radius: 18px;
+  margin: 0 auto 22px;
+}
+
+.reading-opening-image {
+  display: block;
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  object-fit: cover;
+  object-position: center;
+  border-radius: 20px;
+  margin: 0 auto 24px;
+  border: 1px solid var(--line);
+}
+
+.lesson-two-vocabulary-grid .vocabulary-card {
+  scroll-margin-top: 20px;
+}
+
+.lesson-two-vocabulary-grid .choice small,
+.choice-grid .choice small {
+  display: block;
+  margin-top: 6px;
+  color: var(--muted);
+  direction: ltr;
+}
+
+.choice.selected {
+  border-color: var(--green);
+  background: var(--mint);
+  color: var(--green);
+}
+
+.grammar-pronoun-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 14px;
+  margin: 24px 0;
+}
+
+.grammar-pronoun-card,
+.grammar-pair-card,
+.grammar-example {
+  border: 1px solid var(--line);
+  border-radius: 16px;
+  background: #f9fcfa;
+  padding: 18px;
+}
+
+.grammar-pronoun-card {
+  display: grid;
+  gap: 8px;
+  text-align: center;
+}
+
+.grammar-pronoun-card strong {
+  font-size: clamp(1.8rem, 4vw, 2.7rem);
+  color: var(--green);
+}
+
+.grammar-pronoun-card span {
+  color: var(--muted);
+}
+
+.grammar-pair-grid,
+.grammar-example-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 12px;
+  margin: 22px 0;
+}
+
+.grammar-pair-card {
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  gap: 10px;
+  align-items: center;
+  text-align: center;
+}
+
+.grammar-pair-card > .grammar-audio-button {
+  grid-column: 1 / -1;
+}
+
+.grammar-pair-card > div {
+  display: grid;
+  gap: 8px;
+}
+
+.grammar-pair-card strong,
+.grammar-example strong {
+  font-size: clamp(1.2rem, 2.5vw, 1.65rem);
+  line-height: 1.8;
+}
+
+.grammar-example {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 14px;
+}
+
+.grammar-audio-button,
+.grammar-audio-disabled {
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  padding: 8px 11px;
+  background: #fff;
+  color: var(--green);
+  font: inherit;
+  font-size: .82rem;
+}
+
+.grammar-audio-button {
+  cursor: pointer;
+}
+
+.grammar-audio-disabled {
+  display: inline-block;
+  color: var(--muted);
+  background: #f0f2f0;
+}
+
+.grammar-conjugation-table {
+  border: 1px solid var(--line);
+  border-radius: 18px;
+  overflow: hidden;
+  margin: 24px 0;
+}
+
+.grammar-conjugation-head,
+.grammar-conjugation-row {
+  display: grid;
+  grid-template-columns: 1fr 1.4fr 1fr;
+  align-items: center;
+  gap: 12px;
+  padding: 13px 16px;
+}
+
+.grammar-conjugation-head {
+  direction: ltr;
+  background: var(--mint);
+  color: var(--green);
+  font-weight: 800;
+}
+
+.grammar-conjugation-row {
+  border-top: 1px solid var(--line);
+  min-height: 72px;
+}
+
+.grammar-conjugation-row > button {
+  border: 0;
+  border-radius: 10px;
+  background: #f4f8f5;
+  color: var(--green);
+  padding: 10px;
+  font: inherit;
+  font-size: 1.35rem;
+  cursor: pointer;
+}
+
+.grammar-conjugation-row > strong {
+  font-size: 1.55rem;
+  text-align: center;
+}
+
+.grammar-sentence {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 14px;
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  background: #fff;
+  padding: 14px 16px;
+  font-size: clamp(1.15rem, 2.5vw, 1.55rem);
+  line-height: 1.8;
+}
+
+.agreement-rule {
+  margin: 26px 0 14px;
+  padding: 18px;
+  border-radius: 16px;
+  border-right: 5px solid var(--green);
+  background: #f2f9f5;
+}
+
+.agreement-rule.nonhuman {
+  border-right-color: #c28b28;
+  background: #fff8e9;
+}
+
+.agreement-rule h2,
+.agreement-rule p {
+  margin-top: 0;
+}
+
+.agreement-rule strong {
+  font-size: 1.5rem;
+}
+
+.grammar-practice-panel {
+  max-width: 850px;
+  margin: 0 auto;
+}
+
+.grammar-practice-panel textarea {
+  width: 100%;
+  min-height: 120px;
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  padding: 16px;
+  font: inherit;
+  font-size: 1.2rem;
+  resize: vertical;
+}
+
+.grammar-match-prompt {
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  align-items: center;
+  gap: 18px;
+  max-width: 520px;
+  margin: 20px auto;
+  padding: 20px;
+  border-radius: 16px;
+  background: var(--mint);
+  color: var(--green);
+  text-align: center;
+  font-size: 1.7rem;
+}
+
+@media (max-width: 720px) {
+  .grammar-pronoun-grid,
+  .grammar-pair-grid,
+  .grammar-example-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .grammar-conjugation-head {
+    display: none;
+  }
+
+  .grammar-conjugation-row {
+    grid-template-columns: 1fr;
+    text-align: center;
+  }
+
+  .grammar-example,
+  .grammar-sentence {
+    align-items: stretch;
+    flex-direction: column;
+  }
+}
+
+.exam-skill-report {
+  max-width: 620px;
+  margin: 24px auto;
+  padding: 20px;
+  border: 1px solid var(--line);
+  border-radius: 18px;
+  background: #fff;
+  text-align: right;
+}
+
+.exam-skill-report h2 {
+  margin-top: 0;
+}
+
+.exam-skill-report > div {
+  display: flex;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 10px 0;
+  border-top: 1px solid var(--line);
+  direction: ltr;
+}

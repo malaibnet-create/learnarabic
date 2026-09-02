@@ -1,0 +1,35 @@
+'use client';
+
+import { FormEvent, useState } from 'react';
+import { createClient } from '../../lib/supabase/client';
+import { useRouter } from 'next/navigation';
+
+export default function ForgotPasswordPage() {
+  const router = useRouter();
+  const [email, setEmail] = useState('');
+  const [message, setMessage] = useState('');
+  const [error, setError] = useState('');
+  const [loading, setLoading] = useState(false);
+
+  async function submit(event: FormEvent<HTMLFormElement>) {
+    event.preventDefault();
+    setLoading(true); setMessage(''); setError('');
+    const { error: resetError } = await createClient().auth.resetPasswordForEmail(email, {
+      redirectTo: `${window.location.origin}/reset-password`,
+    });
+    setLoading(false);
+    if (resetError) return setError(resetError.status === 429 ? 'أرسلت طلبات كثيرة. انتظر دقيقة ثم حاول مرة أخرى.' : 'تعذر إرسال الرمز. تحقق من البريد وإعدادات Supabase.');
+    setMessage('تم إرسال رمز استعادة كلمة المرور إلى بريدك الإلكتروني.');
+    router.push(`/reset-password?email=${encodeURIComponent(email)}`);
+  }
+
+  return <main className="shell"><section className="auth-page">
+    <a className="brand brand-centered" href="/"><span className="brand-mark">ع</span><span>Dar<span>Lugha</span></span></a>
+    <div className="eyebrow">استعادة الحساب</div><h1>نسيت كلمة المرور؟</h1>
+    <p>أدخل بريدك الإلكتروني وسنرسل لك رمزًا رقميًا لإنشاء كلمة مرور جديدة.</p>
+    <form onSubmit={submit}><input type="email" aria-label="البريد الإلكتروني" placeholder="البريد الإلكتروني" value={email} onChange={event => setEmail(event.target.value)} required />
+      <button className="button" disabled={loading}>{loading ? 'جارٍ الإرسال...' : 'إرسال رمز الاستعادة'}</button>
+      {message && <p className="success-text" role="status">{message}</p>}{error && <p role="alert">{error}</p>}
+    </form><a className="link back-link" href="/login">العودة إلى تسجيل الدخول</a>
+  </section></main>;
+}

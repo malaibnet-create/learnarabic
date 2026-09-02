@@ -1,0 +1,8 @@
+{
+  "name": "arabicpath",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {"dev": "next dev", "build": "next build", "start": "next start", "lint": "next lint", "test:conversation": "node scripts/test-conversation-realtime.mjs", "validate:conversation": "node scripts/validate-level3-conversation.mjs", "test:level3-exam": "node scripts/test-level3-final-exam.mjs", "validate:level3-exam": "node scripts/validate-level3-final-exam.mjs", "validate:level2-vocabulary": "node scripts/validate-level2-vocabulary.mjs", "validate:level2-reading": "node scripts/validate-level2-reading.mjs", "test:level2-reading": "node scripts/test-level2-reading-runtime.mjs", "validate:level2-listening": "node scripts/validate-level2-listening.mjs", "test:level2-listening": "node scripts/test-level2-listening-runtime.mjs", "validate:level2-grammar": "node scripts/validate-level2-grammar.mjs", "validate:level2-conversation": "node scripts/validate-level2-conversation.mjs", "test:level2-exam": "node scripts/test-level2-final-exam.mjs", "validate:level2-exam": "node scripts/validate-level2-final-exam.mjs"},
+  "dependencies": {"@supabase/ssr": "latest", "@supabase/supabase-js": "latest", "next": "latest", "react": "latest", "react-dom": "latest", "openai": "latest"},
+  "devDependencies": {"@types/node": "latest", "@types/react": "latest", "@types/react-dom": "latest", "typescript": "latest"}
+}
